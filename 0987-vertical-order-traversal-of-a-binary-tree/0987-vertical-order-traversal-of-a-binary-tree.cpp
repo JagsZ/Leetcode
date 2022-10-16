@@ -9,16 +9,7 @@
  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
-class Solution {
-      class Compare{
-     public:
-        bool operator()(pair<int, int> a, pair<int, int> b){
-            if(a.second != b.second)
-                return (a.second > b.second);
-            return (a.first > b.first);
-        }
-    };
-       
+class Solution {  
 public:
     vector<vector<int>> verticalTraversal(TreeNode* root) {
    
