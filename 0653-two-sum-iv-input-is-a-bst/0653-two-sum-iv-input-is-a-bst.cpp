@@ -10,7 +10,7 @@
  * };
  */
 class Solution {
-    bool solve(TreeNode *root, int k, set<int> &s){
+    bool solve(TreeNode *root, int k, unordered_set<int> &s){
         if(root == NULL)
             return false;
         
@@ -26,7 +26,7 @@ class Solution {
     }
 public:
     bool findTarget(TreeNode* root, int k) {
-        set<int> s;
+        unordered_set<int> s;
         return solve(root, k, s);
     }
 };
