@@ -2,7 +2,7 @@ class StockSpanner {
     stack<pair<int, int>> st;
 public:
     StockSpanner() {
-        
+        st = stack<pair<int,int>>();
     }
     
     int next(int price) {
