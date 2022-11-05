@@ -19,7 +19,7 @@ public:
                     st.pop();  
                     collision = true;
                     break;
-                /* if prev asteroid is larger than curr so current asteroid will explode*/
+                /* case 3- if prev asteroid is larger than curr so current asteroid will explode*/
                 }else{
                     collision = true;
                     break;
