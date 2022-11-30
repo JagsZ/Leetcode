@@ -1,35 +1,36 @@
 class RandomizedSet {
-    unordered_set<int> us;
-    int n;
+    vector<int> val_index;
+    unordered_map<int, int> map;
 public:
     RandomizedSet() {
-        n=0;
-        srand(time(NULL));
+        
     }
     
     bool insert(int val) {
-        if(us.find(val) == us.end()){
-            us.insert(val);
-            n++;
+        if(map.find(val) != map.end()){
+            return false;
+        }
+        map[val] = val_index.size();
+        val_index.push_back(val);
+        return true;
+    }
+    
+    bool remove(int val) {
+        if(map.find(val) != map.end()){
+            int last = val_index[val_index.size()-1];
+            int index = map[val];
+            swap(val_index[index], val_index[val_index.size()-1]);
+            map[last] = index;
+            map.erase(val);
+            val_index.pop_back();
             return true;
         }
         return false;
     }
     
-    bool remove(int val) {
-        if(us.find(val) != us.end()){
-            us.erase(val);
-            n--;
-            return true;
-        }
-        return false;  
-    }    
-    
     int getRandom() {
-        int index =  (rand()%n);
-        auto itr = us.begin();
-        advance(itr, index);
-        return *itr;
+        int ran = rand() % val_index.size();
+        return val_index[ran];
     }
 };
 
