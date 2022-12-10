@@ -19,7 +19,6 @@ public:
                     }
                     p2++;
                 }
-                //count = max(count, (p1-p2+1));
             }
             count = max(count, (p1-p2+1));
             p1++;
