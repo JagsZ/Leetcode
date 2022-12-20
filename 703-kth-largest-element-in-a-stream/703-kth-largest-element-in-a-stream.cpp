@@ -6,11 +6,6 @@ public:
         kth = k;
         for(auto x : nums)
             pq.push(x);
-        
-        //while(pq.size() > kth){
-          //  pq.pop();
-        //}
-        
     }
     
     int add(int val) {
