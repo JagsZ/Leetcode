@@ -3,23 +3,21 @@ class Solution {
 public:
     int maxProfit(vector<int>& prices) {
         int n = prices.size();
-        vector<vector<int>> prev(2, vector<int>(3, 0));
-        vector<vector<int>> curr(2, vector<int>(3, 0));
+        vector<int> prev(5, 0);
+        vector<int> curr(5, 0);
         
         for(int index = n-1; index >= 0; index--){
-            for(int buy = 0; buy <= 1; buy++){
-                for(int cap = 1; cap <= 2; cap++){
+            for(int tr = 3; tr >= 0; tr--){
                     int profit = 0;
-                    if(buy){
-                        profit = max(-prices[index] + prev[0][cap], prev[1][cap]);
+                    if(tr % 2 == 0){
+                        profit = max(-prices[index] + prev[tr+1], prev[tr]);
                     }else{
-                        profit = max(prices[index] + prev[1][cap-1], prev[0][cap]);
+                        profit = max(prices[index] + prev[tr+1], prev[tr]);
                     }
-                    curr[buy][cap] = profit;
+                    curr[tr] = profit;
                 }
-            }
-            prev = curr;
+                prev = curr;
         }
-        return prev[1][2];
+        return prev[0];
     }
 };
