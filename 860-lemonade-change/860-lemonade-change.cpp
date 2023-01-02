@@ -3,8 +3,6 @@ public:
     bool lemonadeChange(vector<int>& bills) {
         unordered_map<int, int> map;
         
-        //sort(bills.begin(), bills.end());
-        
         for(int i = 0; i < bills.size(); i++){
             
             if(bills[i] == 5){
