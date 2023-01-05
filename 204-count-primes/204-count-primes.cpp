@@ -1,21 +1,18 @@
 class Solution {
 public:
     int countPrimes(int n) {
-        vector<bool> prime(n, false);
+        vector<bool> prime(n, true);
         int count = 0;
         
         for(int i = 2; i <= sqrt(n); i++){
-            int fact = i, j = 2;
-            fact = i*j;
-            while(fact < n){
-                prime[fact] = true;
-                j++;
-                fact = i*j;
+            if(prime[i]){
+                for(int j = i*i; j < n; j=j+i){
+                    prime[j] = false;
+                }
             }
         }
-        
-        for(int i = 2; i < n; i++){
-            if(prime[i] == false)
+        for(int j = 2; j < n; j++){
+            if(prime[j])
                 count++;
         }
         return count;
