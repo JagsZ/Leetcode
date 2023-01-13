@@ -1,57 +1,44 @@
 class Solution {
-    public:
-    int result;
     
-    int DFS(unordered_map<int, vector<int>> &adj, int curr, int parent, string& s) {
+    int dfs(int v, int parent, vector<vector<int>> &adj, string &s, int &max_path){
         
-        int longest = 0;
-        int second_longest = 0;
+        int long1 = 0, long2 = 0;
         
-        for(int &child : adj[curr]) {
+        for(auto child : adj[v]){
             if(child == parent)
                 continue;
+            int path = dfs(child, v, adj, s, max_path);
             
-            int child_longest_length = DFS(adj, child, curr, s);
-            
-            if(s[child] == s[curr])
+            if(s[child] == s[v])
                 continue;
             
-            if(child_longest_length > second_longest)
-                second_longest = child_longest_length;
-            
-            if(second_longest > longest)
-                swap(longest, second_longest);
+            if(path > long2)
+                long2 = path;
+            if(long2 > long1)
+                swap(long1, long2);
         }
-        
-        int koi_ek_acha     = max(longest, second_longest) + 1; //Why this 1 ? Because including the curr node itself
-        
-        int only_root_acha  = 1; //only curr node is valid, rest children have duplicate character
-        
-        int neeche_hi_milgaya_answer = longest + second_longest + 1;
-        
-        
-        
-        result = max({result, neeche_hi_milgaya_answer, koi_ek_acha, only_root_acha});
-        
-        return max(koi_ek_acha, only_root_acha);
+        int result = long1+long2+1;
+        int child = max(long1, long2) + 1;
+        int root = 1;
+        max_path = max(max_path, result);
+        max_path = max(max_path, child);
+        max_path = max(max_path, root);
+        return max(child, root);
         
     }
-    
+public:
     int longestPath(vector<int>& parent, string s) {
-        int n = parent.size();
-        result = 0;
-        unordered_map<int, vector<int>> adj;
+        int n = parent.size(), max_path = 0;
+        vector<vector<int>> adj(n, vector<int>());
         
-        for(int i = 1; i<n; i++) {
-            int u = i;
-            int v = parent[i];
-            
+        for(int i = 1; i < n; i++){
+            int u = parent[i];
+            int v = i;
             adj[u].push_back(v);
             adj[v].push_back(u);
         }
         
-        DFS(adj, 0, -1, s);
-        
-        return result;
+        dfs(0, -1, adj, s, max_path);
+        return max_path;
     }
 };
