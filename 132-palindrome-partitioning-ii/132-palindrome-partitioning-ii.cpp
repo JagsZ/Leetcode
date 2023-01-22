@@ -8,22 +8,27 @@ class Solution {
         }
         return true;
     }
+    int solve(int index, int n, string s, vector<int> &memo){
+        if(index == n)
+            return 0;
+        
+        if(memo[index] != -1){
+            return memo[index];
+        }
+        
+        int min_cost = INT_MAX;
+        for(int i = index; i < n; i++){
+            if(isPalindrome(s, index, i)){
+                int cost = 1 + solve(i+1, n, s, memo);
+                min_cost = min(min_cost, cost);
+            }
+        }
+        return memo[index] = min_cost;
+    }
 public:
     int minCut(string s) {
         int n = s.length();
-        vector<int> dp(n+1 , 0);
-        vector<vector<int>> palindrome_table(n, vector<int>(n, -1));
-        
-        for(int index = n-1; index >= 0; index--){
-            int min_cost = INT_MAX;
-            for(int i = index; i < n; i++){
-                if(palindrome_table[index][i] != -1 ? palindrome_table[index][i]: palindrome_table[index][i] = isPalindrome(s, index, i)){
-                    int cost = 1 + dp[i+1];
-                    min_cost = min(min_cost, cost);
-                }
-            }
-            dp[index] = min_cost;
-        }
-        return dp[0] - 1;
+        vector<int> memo(n , -1);
+        return solve(0, n, s, memo) - 1;
     }
 };
