@@ -14,8 +14,8 @@ class Solution {
         if(root == NULL)
             return;
         
-        nums.push_back(root->val);
         solve(root->left, nums);
+        nums.push_back(root->val);
         solve(root->right, nums);
     }
 public:
@@ -23,7 +23,6 @@ public:
         vector<int> nums;
         int min_diff = INT_MAX; 
         solve(root, nums);
-        sort(nums.begin(), nums.end());
         
         for(int i = 0; i < nums.size()-1; i++){
             min_diff = min(min_diff, (nums[i+1] - nums[i]));
