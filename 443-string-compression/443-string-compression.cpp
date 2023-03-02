@@ -1,12 +1,5 @@
 class Solution {
-    void digits(int num, vector<char> & chars, int &index){
-        string str = "";
-        str = to_string(num);
-        for(int i = 0; i < str.length(); i++){
-            chars[index] = str[i];
-            index++;
-        }
-    }
+  
 public:
     int compress(vector<char>& chars) {
         int i = 0, index = 0;
