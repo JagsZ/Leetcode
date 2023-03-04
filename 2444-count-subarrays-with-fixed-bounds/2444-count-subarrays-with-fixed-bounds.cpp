@@ -6,15 +6,18 @@ public:
         
         for(int i = 0; i < nums.size(); i++){
             
-            if(nums[i] < minK || nums[i] > maxK)
-                    left_pos = i;
+            if(nums[i] < minK || nums[i] > maxK){
+                mi_pos = -1;
+                mx_pos = -1;  
+                left_pos = i;
+            }
             
-                if(nums[i] == minK)
-                    mi_pos = i;
-                if(nums[i] == maxK)
-                    mx_pos = i;
+            if(nums[i] == minK)
+                mi_pos = i;
+            if(nums[i] == maxK)
+                mx_pos = i;
                 
-                ans += max(0, min(mi_pos, mx_pos) - left_pos);
+            ans += max(0, min(mi_pos, mx_pos) - left_pos);
         }
         return ans;
     }
