@@ -6,13 +6,14 @@ class Solution {
     if(start == end){
         return 1;
     }
-    if(dp[start][end] == -1){
-        if(src[start] == src[end]){
-            dp[start][end] = (2+helperOPDP(src, start+1,end-1,dp));
-        }else{
-            dp[start][end] = max(helperOPDP(src, start, end-1,dp), helperOPDP(src, start+1, end,dp));
-        }
-    }
+    if(dp[start][end] != -1)
+        return dp[start][end];
+        
+    if(src[start] == src[end])
+        dp[start][end] = (2+helperOPDP(src, start+1,end-1,dp));
+    else
+        dp[start][end] = max(helperOPDP(src, start, end-1,dp), helperOPDP(src, start+1, end,dp));
+
     return dp[start][end];
 }
 public:
