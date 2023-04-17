@@ -9,7 +9,6 @@ public:
             if((candies[i] + extraCandies) >= max_val){
                 ans[i] = true;
             }
-            max_val = max(max_val, candies[i]);
         }
         return ans;
     }
