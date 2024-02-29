@@ -46,11 +46,6 @@ public:
                 if(check_order(val, level%2) == false)
                     return false;
                 q.push(NULL);
-                
-                /*for(auto x : val)
-                    cout<<x<<" ";
-                cout<<endl;
-                cout<<"level"<<level<<endl;*/
                 val.resize(0);
                 level++;
             }else{
@@ -62,7 +57,7 @@ public:
             }
         }
         if(check_order(val, level%2) == false)
-                    return false;
+            return false;
         return true;
     }
 };
