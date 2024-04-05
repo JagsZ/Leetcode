@@ -9,22 +9,16 @@
  * };
  */
 class Solution {
-     ListNode *head1 = NULL;
-     void reverse(ListNode *head,ListNode *prev){
-         if(head == NULL)
-             return;
-         if(head->next == NULL){
-             head1 = head;
-             head->next = prev;
-             return;
-         }
-         reverse(head->next,head);
-         head->next = prev;
-     }
+    
 public:
     ListNode* reverseList(ListNode* head) {
-       ListNode *prev = NULL;
-       reverse(head, prev);
-       return head1;
+       ListNode *prev = NULL, *curr = head, *next = NULL;
+       while(curr != NULL){
+           next = curr->next;
+           curr->next = prev;
+           prev = curr;
+           curr = next;
+       }
+       return prev;
     }
 };
