@@ -1,33 +1,37 @@
 class Solution {
-    bool dfs(int v, vector<vector<int>> &adj, vector<int> &vis){
-        vis[v] = true;
-        
-        for(auto x : adj[v]){
-            if(vis[x] == -1){
-                if(dfs(x, adj, vis) == false)
-                    return false;
-            } else if(vis[x] == 1){
-                return false;
-            }
-        }
-        vis[v] =  2;
-        return true;
-    }
+  
 public:
     bool canFinish(int numCourses, vector<vector<int>>& prerequisites) {
-        vector<vector<int>> adj(numCourses,vector<int>());
-        vector<int> vis(numCourses, -1);
-
-        for(auto x : prerequisites){
-            adj[x[0]].push_back(x[1]);
-        }
+        vector<int> indigree(numCourses, 0);
+        vector<vector<int>> adj(numCourses, vector<int>());
+        queue<int> q;
+        vector<int> topo;
         
-        for(int i = 0; i < numCourses; i++){
-            if(vis[i] == -1){
-                if(dfs(i, adj, vis) == false)
-                    return false;
+        for(auto x : prerequisites)
+            adj[x[0]].push_back(x[1]);
+        
+      for(int i = 0; i < numCourses; i++){
+          for( auto it: adj[i]){
+              indigree[it]++;
+          }
+      }
+        
+      for(int i = 0; i < numCourses; i++){
+            if(indigree[i] == 0)
+                q.push(i);
+      }
+        
+      while(!q.empty()){
+        int node = q.front();
+        q.pop();
+        topo.push_back(node);
+            
+        for(auto it : adj[node]){
+            indigree[it]--;
+            if(indigree[it] == 0)
+                q.push(it);
             }
         }
-        return true;
+        return topo.size() == numCourses? true: false;
     }
 };
